@@ -2,6 +2,7 @@
 import IconMicro from './icons/IconMicro.vue'
 import IconPaper from './icons/IconPaper.vue'
 import IconSmile from './icons/IconSmile.vue'
+import IconSend from './icons/IconSend.vue'
 import { ref } from 'vue'
 import data from 'emoji-mart-vue-fast/data/facebook.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
@@ -10,6 +11,7 @@ import { Picker, EmojiIndex, Emoji } from 'emoji-mart-vue-fast/src'
 export default {
   components: {
     IconMicro,
+    IconSend,
     IconPaper,
     IconSmile,
     Picker,
@@ -20,6 +22,7 @@ export default {
     const message = ref('')
     const lastHeight = ref(0)
     const showSticker = ref(false)
+    const showMicro = ref(true)
 
     const showEmoji = (emoji) => {
       message.value += emoji.native
@@ -32,6 +35,9 @@ export default {
         textarea.style.height = `${textarea.scrollHeight}px`
         lastHeight.value = textarea.scrollHeight
       }
+
+      if (textarea.value !== '') showMicro.value = false
+      else showMicro.value = true
     }
 
     return {
@@ -39,7 +45,8 @@ export default {
       message,
       showEmoji,
       handleAdjustHeight,
-      showSticker
+      showSticker,
+      showMicro
     }
   }
 }
@@ -62,7 +69,7 @@ export default {
           <textarea v-model="message" @input="handleAdjustHeight"></textarea>
           <span class="file"><IconPaper /></span>
         </div>
-        <span class="micro"><IconMicro /></span>
+        <span class="micro"><IconMicro v-if="showMicro" /><IconSend v-if="!showMicro" /></span>
       </div>
       <Picker
         :data="emojiIndex"
@@ -152,6 +159,9 @@ export default {
 .container_chartboot .footer .messages span {
   display: inline-block;
 }
+.container_chartboot .footer .messages .smile :hover {
+  cursor: pointer;
+}
 .container_chartboot .footer .messages .micro {
   width: 35px;
   height: 35px;
@@ -175,15 +185,15 @@ export default {
 }
 .container_chartboot .footer .messages .message textarea {
   width: 80%;
-  height: auto;
   min-height: 100%;
+  margin: 0px 3px;
+  height: auto;
   resize: none;
   background: none;
   outline: none;
   border: none;
   font-family: 'Marck Script';
   font-style: normal;
-  margin: 0px 3px;
 }
 .container_chartboot .footer span {
   color: rgba(0, 0, 0, 0.25);
@@ -192,7 +202,7 @@ export default {
   height: 25px;
 }
 .container_chartboot .footer .messages .message span {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 .container_chartboot .footer .file {
   transform: rotate(30deg);

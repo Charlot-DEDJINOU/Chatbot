@@ -4,15 +4,10 @@ import Chatboot2 from '../components/Chatboot2.vue'
 </script>
 
 <template>
-  <main class="container">
+  <main class="container d-flex">
     <Chatboot1 />
     <Chatboot2 />
   </main>
 </template>
 
-<style>
-.container {
-  border: 1px solid red;
-  display: flex;
-}
-</style>
+<style></style>
