@@ -69,7 +69,7 @@ export default {
           <textarea v-model="message" @input="handleAdjustHeight"></textarea>
           <span class="file"><IconPaper /></span>
         </div>
-        <span class="micro"><IconMicro v-if="showMicro" /><IconSend v-if="!showMicro"/></span>
+        <span class="micro"><IconMicro v-if="showMicro" /><IconSend v-if="!showMicro" /></span>
       </div>
       <Picker
         :data="emojiIndex"
