@@ -3,6 +3,7 @@ import IconMicro from './icons/IconMicro.vue'
 import IconPaper from './icons/IconPaper.vue'
 import IconSmile from './icons/IconSmile.vue'
 import IconSend from './icons/IconSend.vue'
+import Message from './Message.vue'
 import { ref } from 'vue'
 import data from 'emoji-mart-vue-fast/data/facebook.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
@@ -14,6 +15,7 @@ export default {
     IconSend,
     IconPaper,
     IconSmile,
+    Message,
     Picker,
     Emoji
   },
@@ -61,7 +63,24 @@ export default {
         <i>En ligne</i>
       </div>
     </div>
-    <div class="body"></div>
+    <div class="body">
+      <Message
+        name="Espoir Destiny"
+        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
+      />
+      <Message
+        name="Espoir Destiny"
+        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
+      />
+      <Message
+        name="Espoir Destiny"
+        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
+      />
+      <Message
+        name="Espoir Destiny"
+        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
+      />
+    </div>
     <div class="footer">
       <div class="messages">
         <div class="message">
@@ -137,6 +156,7 @@ export default {
 }
 .container_chartboot .body {
   width: 100%;
+  height: 430px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
