@@ -21,13 +21,16 @@ export default {
   },
   setup() {
     const emojiIndex = new EmojiIndex(data)
-    const message = ref('')
     const lastHeight = ref(0)
     const showSticker = ref(false)
     const showMicro = ref(true)
+    const newMessage = ref('')
+    const messages = ref([])
 
     const showEmoji = (emoji) => {
-      message.value += emoji.native
+      newMessage.value += emoji.native
+
+      setMicro()
     }
 
     const handleAdjustHeight = () => {
@@ -38,17 +41,46 @@ export default {
         lastHeight.value = textarea.scrollHeight
       }
 
-      if (textarea.value !== '') showMicro.value = false
+      setMicro()
+    }
+
+    const setMicro = () => {
+      if (newMessage.value.trim() !== '') showMicro.value = false
       else showMicro.value = true
+    }
+
+    const ws = new WebSocket('ws://localhost:3001')
+
+    ws.onopen = () => {
+      console.log('Client 1 connecté')
+    }
+
+    ws.onmessage = (message) => {
+      messages.value.push(JSON.parse(message.data))
+    }
+
+    const sendMessage = () => {
+      if (newMessage.value.trim() !== '') {
+        const data = {
+          recepteur: 'Charlot Joël',
+          destinateur: 'Espoir Destiny',
+          message: newMessage.value
+        }
+        messages.value.push(data)
+        ws.send(JSON.stringify(data))
+        newMessage.value = ''
+      }
     }
 
     return {
       emojiIndex,
-      message,
       showEmoji,
       handleAdjustHeight,
       showSticker,
-      showMicro
+      showMicro,
+      newMessage,
+      sendMessage,
+      messages
     }
   }
 }
@@ -65,38 +97,30 @@ export default {
     </div>
     <div class="body">
       <Message
-        name="Espoir Destiny"
-        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
-      />
-      <Message
-        name="Espoir Destiny"
-        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
-      />
-      <Message
-        name="Espoir Destiny"
-        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
-      />
-      <Message
-        name="Espoir Destiny"
-        message="Je compte bien avoir une discussion avec eux dans les prochains jours. Je vous remercie bien pour le rappel."
+        v-for="(message, index) in messages"
+        :key="index"
+        :name="message.destinateur"
+        :message="message.message"
       />
     </div>
     <div class="footer">
       <div class="messages">
         <div class="message">
           <span class="smile"><IconSmile @click="() => (showSticker = !showSticker)" /></span>
-          <textarea v-model="message" @input="handleAdjustHeight"></textarea>
+          <textarea v-model="newMessage" @input="handleAdjustHeight"></textarea>
           <span class="file"><IconPaper /></span>
         </div>
-        <span class="micro"><IconMicro v-if="showMicro" /><IconSend v-if="!showMicro" /></span>
+        <span class="micro"
+          ><IconMicro v-if="showMicro" /><IconSend v-if="!showMicro" @click="sendMessage"
+        /></span>
       </div>
       <Picker
         :data="emojiIndex"
         set="apple"
         :show-search="false"
         :show-preview="false"
-        skin="1"
-        perLine="9"
+        :skin=1
+        :perLine=9
         @select="showEmoji"
         title="Espoir"
         color="green"
