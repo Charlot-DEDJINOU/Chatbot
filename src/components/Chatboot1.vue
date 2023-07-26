@@ -57,6 +57,8 @@ export default {
 
     ws.onmessage = (message) => {
       messages.value.push(JSON.parse(message.data))
+      
+      setTimeout(scrollBody , 1000)
     }
 
     const sendMessage = () => {
@@ -69,7 +71,15 @@ export default {
         messages.value.push(data)
         ws.send(JSON.stringify(data))
         newMessage.value = ''
+        setMicro()
+
+        setTimeout(scrollBody , 1000)
       }
+    }
+
+    const scrollBody = () => {
+      var element = document.getElementsByClassName('body')[0]
+      element.scrollTop=element.scrollHeight ;
     }
 
     return {

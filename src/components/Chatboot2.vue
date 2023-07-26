@@ -57,6 +57,8 @@ export default {
 
     ws.onmessage = (message) => {
       messagesClient2.value.push(JSON.parse(message.data))
+
+      setTimeout(scrollBody , 1000)
     }
 
     const sendMessage = () => {
@@ -69,7 +71,15 @@ export default {
         messagesClient2.value.push(data)
         ws.send(JSON.stringify(data))
         newMessageClient2.value = ''
+        setMicro()
+
+        setTimeout(scrollBody , 1000)
       }
+    }
+
+    const scrollBody = () => {
+      var element = document.getElementsByClassName('client2')[0]
+      element.scrollTop=element.scrollHeight ;
     }
 
     return {
@@ -95,7 +105,7 @@ export default {
         <i>En ligne</i>
       </div>
     </div>
-    <div class="body">
+    <div class="body client2">
       <Message v-for="(message, index) in messagesClient2" :key="index" :name="message.destinateur" :message="message.message"/>
     </div>
     <div class="footer">
