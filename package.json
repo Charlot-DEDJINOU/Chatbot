@@ -12,7 +12,8 @@
   "dependencies": {
     "emoji-mart-vue-fast": "^15.0.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.2",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
