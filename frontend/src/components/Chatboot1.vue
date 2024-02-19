@@ -57,8 +57,8 @@ export default {
 
     ws.onmessage = (message) => {
       messages.value.push(JSON.parse(message.data))
-      
-      setTimeout(scrollBody , 1000)
+
+      setTimeout(scrollBody, 1000)
     }
 
     const sendMessage = () => {
@@ -73,13 +73,13 @@ export default {
         newMessage.value = ''
         setMicro()
 
-        setTimeout(scrollBody , 1000)
+        setTimeout(scrollBody, 1000)
       }
     }
 
     const scrollBody = () => {
       var element = document.getElementsByClassName('body')[0]
-      element.scrollTop=element.scrollHeight ;
+      element.scrollTop = element.scrollHeight
     }
 
     return {
@@ -129,8 +129,8 @@ export default {
         set="apple"
         :show-search="false"
         :show-preview="false"
-        :skin=1
-        :perLine=9
+        :skin="1"
+        :perLine="9"
         @select="showEmoji"
         title="Espoir"
         color="green"
