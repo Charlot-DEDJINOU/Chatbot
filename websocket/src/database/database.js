@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 
 function createDb() {
-  const db = new sqlite3.Database("./database/data.db");
+  const db = new sqlite3.Database("./src/database/data.db");
   console.log("Connexion à la base de donnée");
   return db;
 }
