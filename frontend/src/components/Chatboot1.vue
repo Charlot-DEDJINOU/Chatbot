@@ -157,9 +157,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: 'Marck Script';
-  font-style: normal;
-  font-weight: 800;
   box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.3);
   margin: 50px;
 }
