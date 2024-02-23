@@ -99,7 +99,7 @@ export default {
 <template>
   <div class="container_chartboot">
     <div class="header">
-      <img src="../assets/home6.jpg" />
+      <img src="../assets/charlot.jpg" />
       <div>
         <p>Charlot Joël</p>
         <i>En ligne</i>
@@ -245,8 +245,6 @@ export default {
   background: none;
   outline: none;
   border: none;
-  font-family: 'Marck Script';
-  font-style: normal;
 }
 .container_chartboot .footer span {
   color: rgba(0, 0, 0, 0.25);

@@ -243,8 +243,6 @@ export default {
   background: none;
   outline: none;
   border: none;
-  font-family: 'Marck Script';
-  font-style: normal;
 }
 .container_chartboot .footer span {
   color: rgba(0, 0, 0, 0.25);
